@@ -20,4 +20,14 @@ public class PrayerController {
     public PrayerTimeResponse getPrayerTimes(@PathVariable String date) {
         return prayerService.getPrayerTimesForDate(date);
     }
+    
+    @GetMapping("/today")
+    public PrayerTimeResponse getTodayPrayerTimes() {
+        return prayerService.getTodayPrayerTimes();
+    }
+    
+    @GetMapping("/tomorrow")
+    public PrayerTimeResponse getTomorrowPrayerTimes() {
+        return prayerService.getTomorrowPrayerTimes();
+    }
 } 

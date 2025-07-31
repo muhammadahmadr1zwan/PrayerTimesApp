@@ -2,7 +2,7 @@ services:
   - type: web
     name: prayer-app-backend
     runtime: docker
-    healthCheckPath: /api/prayer-times/2025-07-30
+    healthCheckPath: /api/prayer-times/today
     envVars:
       - key: JAVA_VERSION
         value: 17 

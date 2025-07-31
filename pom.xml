@@ -32,6 +32,11 @@
             <version>1.3.2</version>
         </dependency>
         <dependency>
+            <groupId>com.batoulapps</groupId>
+            <artifactId>adhan-java</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>

@@ -1,5 +1,6 @@
 package com.masjid.prayerapp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
@@ -14,6 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class PrayerService {
     private List<PrayerCsvRecord> allRecords = new ArrayList<>();
+    private final PrayerCalculationService calculationService;
+    
+    @Autowired
+    public PrayerService(PrayerCalculationService calculationService) {
+        this.calculationService = calculationService;
+    }
 
     @PostConstruct
     public void loadCsv() {
@@ -34,11 +41,29 @@ public class PrayerService {
     }
 
     public PrayerTimeResponse getPrayerTimesForDate(String date) {
-        List<Prayer> prayers = allRecords.stream()
+        // First try to get from CSV (for historical data or backup)
+        List<Prayer> csvPrayers = allRecords.stream()
                 .filter(r -> r.date.equals(date))
                 .map(r -> new Prayer(r.name, r.athan, r.iqamah))
                 .collect(Collectors.toList());
-        return new PrayerTimeResponse(date, prayers);
+        
+        // If CSV has data, use it (for historical dates)
+        if (!csvPrayers.isEmpty()) {
+            return new PrayerTimeResponse(date, csvPrayers);
+        }
+        
+        // Otherwise, calculate prayer times automatically
+        return calculationService.calculatePrayerTimesForDate(date);
+    }
+    
+    // New method to get today's prayer times
+    public PrayerTimeResponse getTodayPrayerTimes() {
+        return calculationService.getTodayPrayerTimes();
+    }
+    
+    // New method to get tomorrow's prayer times
+    public PrayerTimeResponse getTomorrowPrayerTimes() {
+        return calculationService.getTomorrowPrayerTimes();
     }
 
     private static class PrayerCsvRecord {

@@ -30,4 +30,9 @@ public class PrayerController {
     public PrayerTimeResponse getTomorrowPrayerTimes() {
         return prayerService.getTomorrowPrayerTimes();
     }
+    
+    @GetMapping("/jummah")
+    public PrayerTimeResponse getJummahInfo() {
+        return prayerService.getJummahInfo();
+    }
 } 

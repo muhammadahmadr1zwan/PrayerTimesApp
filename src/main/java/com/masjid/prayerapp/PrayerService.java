@@ -65,6 +65,15 @@ public class PrayerService {
     public PrayerTimeResponse getTomorrowPrayerTimes() {
         return calculationService.getTomorrowPrayerTimes();
     }
+    
+    // Method to get Jummah information
+    public PrayerTimeResponse getJummahInfo() {
+        List<Prayer> jummahPrayers = new ArrayList<>();
+        jummahPrayers.add(new Prayer("Jummah", "13:30:00", "13:30:00")); // 1:30 PM
+        
+        String today = java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE);
+        return new PrayerTimeResponse(today, jummahPrayers);
+    }
 
     private static class PrayerCsvRecord {
         String date, name, athan, iqamah;

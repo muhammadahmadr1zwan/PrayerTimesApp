@@ -13,10 +13,10 @@ import java.util.List;
 @Service
 public class PrayerCalculationService {
     
-    // Default coordinates for a central location (you can make this configurable)
-    private static final double DEFAULT_LATITUDE = 40.7128; // New York City
-    private static final double DEFAULT_LONGITUDE = -74.0060;
-    private static final String DEFAULT_TIMEZONE = "America/New_York";
+    // IMCA (Indianapolis Muslim Community Association) coordinates
+    private static final double DEFAULT_LATITUDE = 39.7684; // Indianapolis, IN
+    private static final double DEFAULT_LONGITUDE = -86.1581;
+    private static final String DEFAULT_TIMEZONE = "America/Indiana/Indianapolis";
     
     // Prayer time calculation method (using Muslim World League)
     private static final CalculationMethod CALCULATION_METHOD = CalculationMethod.MUSLIM_WORLD_LEAGUE;
@@ -32,12 +32,12 @@ public class PrayerCalculationService {
             List<Prayer> prayers = new ArrayList<>();
             
             // Add each prayer time
-            prayers.add(createPrayer("Fajr", prayerTimes.fajr));
-            prayers.add(createPrayer("Sunrise", prayerTimes.sunrise));
-            prayers.add(createPrayer("Dhuhr", prayerTimes.dhuhr));
-            prayers.add(createPrayer("Asr", prayerTimes.asr));
-            prayers.add(createPrayer("Maghrib", prayerTimes.maghrib));
-            prayers.add(createPrayer("Isha", prayerTimes.isha));
+            prayers.add(createPrayer("Fajr", prayerTimes.fajr, 20));
+            prayers.add(createPrayer("Sunrise", prayerTimes.sunrise, 0)); // No iqamah for sunrise
+            prayers.add(createPrayer("Dhuhr", prayerTimes.dhuhr, 20));
+            prayers.add(createPrayer("Asr", prayerTimes.asr, 20));
+            prayers.add(createPrayer("Maghrib", prayerTimes.maghrib, 5)); // 5 minutes for Maghrib
+            prayers.add(createPrayer("Isha", prayerTimes.isha, 20));
             
             return new PrayerTimeResponse(dateStr, prayers);
             
@@ -47,7 +47,7 @@ public class PrayerCalculationService {
         }
     }
     
-    private Prayer createPrayer(String name, Date prayerTime) {
+    private Prayer createPrayer(String name, Date prayerTime, int iqamahDelayMinutes) {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(
             prayerTime.toInstant(), 
             ZoneId.of(DEFAULT_TIMEZONE)
@@ -56,8 +56,8 @@ public class PrayerCalculationService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String timeStr = localDateTime.format(formatter);
         
-        // Add 20 minutes for Iqamah (you can make this configurable)
-        LocalDateTime iqamahTime = localDateTime.plusMinutes(20);
+        // Calculate Iqamah time based on prayer type
+        LocalDateTime iqamahTime = localDateTime.plusMinutes(iqamahDelayMinutes);
         String iqamahStr = iqamahTime.format(formatter);
         
         return new Prayer(name, timeStr, iqamahStr);

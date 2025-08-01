@@ -96,7 +96,7 @@ public class PrayerCalculationService {
     }
     
     private Prayer createPrayer(String name, LocalTime prayerTime, int iqamahDelayMinutes) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
         String timeStr = prayerTime.format(formatter);
         
         // Calculate Iqamah time

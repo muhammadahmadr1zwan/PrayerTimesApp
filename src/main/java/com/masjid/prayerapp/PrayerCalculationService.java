@@ -96,6 +96,7 @@ public class PrayerCalculationService {
     }
     
     private Prayer createPrayer(String name, LocalTime prayerTime, int iqamahDelayMinutes) {
+        // Force 12-hour format with AM/PM for IMCA prayer times
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
         String timeStr = prayerTime.format(formatter);
         

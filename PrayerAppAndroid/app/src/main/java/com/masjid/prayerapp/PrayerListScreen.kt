@@ -58,7 +58,8 @@ fun PrayerTimesScreen(paddingValues: PaddingValues, prayerViewModel: PrayerViewM
                 }
             } else if (prayers.isNotEmpty()) {
                 item {
-                    // Debug info - show API response
+                    // Debug info - show API response and location
+                    val currentLocation by prayerViewModel.currentLocation.collectAsStateWithLifecycle()
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(
@@ -82,6 +83,38 @@ fun PrayerTimesScreen(paddingValues: PaddingValues, prayerViewModel: PrayerViewM
                                     color = Color(0xFF94A3B8)
                                 )
                             )
+                            
+                            Spacer(modifier = Modifier.height(8.dp))
+                            
+                            if (currentLocation != null) {
+                                Text(
+                                    text = "📍 Location-based prayer times",
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        color = Color(0xFF4F9DFF),
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                                Text(
+                                    text = "Lat: ${String.format("%.4f", currentLocation!!.latitude)}, Lon: ${String.format("%.4f", currentLocation!!.longitude)}",
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        color = Color(0xFF94A3B8)
+                                    )
+                                )
+                            } else {
+                                Text(
+                                    text = "📍 Using default prayer times (Indianapolis, IN)",
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        color = Color(0xFFEF4444),
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                                Text(
+                                    text = "Enable location access for accurate prayer times",
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        color = Color(0xFF94A3B8)
+                                    )
+                                )
+                            }
                         }
                     }
                 }

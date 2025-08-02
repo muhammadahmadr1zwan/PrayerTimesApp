@@ -21,9 +21,18 @@ class PrayerApiService(private val baseUrl: String = "https://prayer-app-backend
 
     @Throws(IOException::class)
     suspend fun getTodayPrayerTimes(): PrayerTimeResponse? {
+        return getTodayPrayerTimesWithLocation(null, null)
+    }
+    
+    @Throws(IOException::class)
+    suspend fun getTodayPrayerTimesWithLocation(latitude: Double?, longitude: Double?): PrayerTimeResponse? {
         return withContext(Dispatchers.IO) {
             try {
-                val url = "${baseUrl}today"
+                val url = if (latitude != null && longitude != null) {
+                    "${baseUrl}today/location?latitude=$latitude&longitude=$longitude"
+                } else {
+                    "${baseUrl}today"
+                }
                 Log.d("PrayerApiService", "Making request to: $url")
                 
                 val request = Request.Builder().url(url).build()

@@ -1,29 +1,33 @@
 package com.masjid.prayerapp
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import android.util.Log
 
-class PrayerViewModel(private val apiService: PrayerApiService = PrayerApiService()) : ViewModel() {
-    private val _prayers = mutableStateOf<List<Prayer>>(emptyList())
-    val prayers: State<List<Prayer>> get() = _prayers
-
-    private val _isLoading = mutableStateOf(false)
-    val isLoading: State<Boolean> get() = _isLoading
-
-    private val _error = mutableStateOf<String?>(null)
-    val error: State<String?> get() = _error
-
+class PrayerViewModel(
+    private val apiService: PrayerApiService = PrayerApiService(),
+    private val context: Context? = null
+) : ViewModel() {
+    
+    private val _prayers = MutableStateFlow<List<Prayer>>(emptyList())
+    val prayers: StateFlow<List<Prayer>> = _prayers.asStateFlow()
+    
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+    
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error.asStateFlow()
+    
     init {
         Log.d("PrayerViewModel", "Initializing PrayerViewModel")
         fetchTodayPrayers()
     }
-
+    
     private fun fetchTodayPrayers() {
         Log.d("PrayerViewModel", "Starting to fetch today's prayers")
         viewModelScope.launch {
@@ -32,7 +36,6 @@ class PrayerViewModel(private val apiService: PrayerApiService = PrayerApiServic
                 _error.value = null
                 Log.d("PrayerViewModel", "Making API call to get today's prayers")
                 
-                // Use the today endpoint for automatic date handling
                 val response = apiService.getTodayPrayerTimes()
                 Log.d("PrayerViewModel", "API response received: $response")
                 
@@ -48,6 +51,11 @@ class PrayerViewModel(private val apiService: PrayerApiService = PrayerApiServic
                     Log.d("PrayerViewModel", "Successfully loaded ${response.prayers.size} prayers")
                     _prayers.value = response.prayers
                     _error.value = null
+                    
+                    // Schedule notifications if context is available
+                    context?.let { ctx ->
+                        schedulePrayerNotifications(ctx, response.prayers)
+                    }
                 }
             } catch (e: Exception) {
                 Log.e("PrayerViewModel", "Failed to load prayer times: ${e.message}", e)
@@ -59,9 +67,56 @@ class PrayerViewModel(private val apiService: PrayerApiService = PrayerApiServic
             }
         }
     }
-
+    
     fun retry() {
         Log.d("PrayerViewModel", "Retrying to fetch prayers")
         fetchTodayPrayers()
+    }
+    
+    fun schedulePrayerNotifications(context: Context, prayers: List<Prayer>) {
+        try {
+            // Get notification time from settings
+            val notificationTime = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+                .getInt("notification_time_minutes", 15)
+            
+            // Check if notifications are enabled
+            val notificationsEnabled = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+                .getBoolean("prayer_notifications_enabled", false)
+            
+            if (notificationsEnabled) {
+                Log.d("PrayerViewModel", "Scheduling prayer notifications for ${prayers.size} prayers")
+                PrayerNotificationService.schedulePrayerNotifications(context, prayers, notificationTime)
+            } else {
+                Log.d("PrayerViewModel", "Prayer notifications are disabled")
+                PrayerNotificationService.cancelAllNotifications(context)
+            }
+        } catch (e: Exception) {
+            Log.e("PrayerViewModel", "Failed to schedule notifications: ${e.message}", e)
+        }
+    }
+    
+    fun enablePrayerNotifications(context: Context, enabled: Boolean) {
+        context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean("prayer_notifications_enabled", enabled)
+            .apply()
+        
+        if (enabled) {
+            schedulePrayerNotifications(context, _prayers.value)
+        } else {
+            PrayerNotificationService.cancelAllNotifications(context)
+        }
+    }
+    
+    fun setNotificationTime(context: Context, minutes: Int) {
+        context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+            .edit()
+            .putInt("notification_time_minutes", minutes)
+            .apply()
+        
+        // Reschedule notifications with new time
+        if (_prayers.value.isNotEmpty()) {
+            schedulePrayerNotifications(context, _prayers.value)
+        }
     }
 } 

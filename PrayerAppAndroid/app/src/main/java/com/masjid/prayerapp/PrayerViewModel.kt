@@ -1,8 +1,6 @@
 package com.masjid.prayerapp
 
 import android.content.Context
-import android.location.Location
-import android.location.LocationManager
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,60 +23,20 @@ class PrayerViewModel(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
     
-    private val _currentLocation = MutableStateFlow<Location?>(null)
-    val currentLocation: StateFlow<Location?> = _currentLocation.asStateFlow()
-    
     init {
-        Log.d("PrayerViewModel", "Initializing PrayerViewModel")
-        getCurrentLocation()
+        Log.d("PrayerViewModel", "Initializing PrayerViewModel for IMCA")
         fetchTodayPrayers()
     }
     
-    private fun getCurrentLocation() {
-        context?.let { ctx ->
-            try {
-                val locationManager = ctx.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                
-                // Try to get last known location from GPS provider
-                val gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if (gpsLocation != null) {
-                    Log.d("PrayerViewModel", "Got GPS location: ${gpsLocation.latitude}, ${gpsLocation.longitude}")
-                    _currentLocation.value = gpsLocation
-                    return
-                }
-                
-                // Try network provider as fallback
-                val networkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                if (networkLocation != null) {
-                    Log.d("PrayerViewModel", "Got network location: ${networkLocation.latitude}, ${networkLocation.longitude}")
-                    _currentLocation.value = networkLocation
-                    return
-                }
-                
-                Log.d("PrayerViewModel", "No location available")
-            } catch (e: Exception) {
-                Log.e("PrayerViewModel", "Error getting location: ${e.message}", e)
-            }
-        }
-    }
-    
     private fun fetchTodayPrayers() {
-        Log.d("PrayerViewModel", "Starting to fetch today's prayers")
+        Log.d("PrayerViewModel", "Starting to fetch today's prayers for IMCA")
         viewModelScope.launch {
             try {
                 _isLoading.value = true
                 _error.value = null
                 Log.d("PrayerViewModel", "Making API call to get today's prayers")
                 
-                val location = _currentLocation.value
-                val response = if (location != null) {
-                    Log.d("PrayerViewModel", "Using location-based prayer times: ${location.latitude}, ${location.longitude}")
-                    apiService.getTodayPrayerTimesWithLocation(location.latitude, location.longitude)
-                } else {
-                    Log.d("PrayerViewModel", "Using default prayer times (no location available)")
-                    apiService.getTodayPrayerTimes()
-                }
-                
+                val response = apiService.getTodayPrayerTimes()
                 Log.d("PrayerViewModel", "API response received: $response")
                 
                 if (response == null) {
@@ -112,7 +70,6 @@ class PrayerViewModel(
     
     fun retry() {
         Log.d("PrayerViewModel", "Retrying to fetch prayers")
-        getCurrentLocation() // Refresh location
         fetchTodayPrayers()
     }
     

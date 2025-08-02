@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import android.util.Log
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class PrayerApiService(private val baseUrl: String = "https://prayer-app-backend-vozu.onrender.com/api/prayer-times/") {
     private val client = OkHttpClient.Builder()
@@ -21,18 +23,10 @@ class PrayerApiService(private val baseUrl: String = "https://prayer-app-backend
 
     @Throws(IOException::class)
     suspend fun getTodayPrayerTimes(): PrayerTimeResponse? {
-        return getTodayPrayerTimesWithLocation(null, null)
-    }
-    
-    @Throws(IOException::class)
-    suspend fun getTodayPrayerTimesWithLocation(latitude: Double?, longitude: Double?): PrayerTimeResponse? {
         return withContext(Dispatchers.IO) {
             try {
-                val url = if (latitude != null && longitude != null) {
-                    "${baseUrl}today/location?latitude=$latitude&longitude=$longitude"
-                } else {
-                    "${baseUrl}today"
-                }
+                val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+                val url = "${baseUrl}$today"
                 Log.d("PrayerApiService", "Making request to: $url")
                 
                 val request = Request.Builder().url(url).build()
@@ -54,9 +48,7 @@ class PrayerApiService(private val baseUrl: String = "https://prayer-app-backend
                         throw IOException("Response body is null")
                     }
                     
-                    // Test parsing with a simple approach first
                     try {
-                        // Try to parse as raw JSON first
                         Log.d("PrayerApiService", "Attempting to parse JSON...")
                         val result = responseAdapter.fromJson(body)
                         Log.d("PrayerApiService", "Parsed result: $result")
@@ -106,7 +98,8 @@ class PrayerApiService(private val baseUrl: String = "https://prayer-app-backend
     @Throws(IOException::class)
     suspend fun getTomorrowPrayerTimes(): PrayerTimeResponse? {
         return withContext(Dispatchers.IO) {
-            val url = "${baseUrl}tomorrow"
+            val tomorrow = LocalDate.now().plusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE)
+            val url = "${baseUrl}$tomorrow"
             val request = Request.Builder().url(url).build()
 
             client.newCall(request).execute().use { response ->

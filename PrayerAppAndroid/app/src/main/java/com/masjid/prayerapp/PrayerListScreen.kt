@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,8 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import java.time.LocalTime
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun PrayerTimesScreen(paddingValues: PaddingValues, prayerViewModel: PrayerViewModel) {
@@ -45,7 +44,7 @@ fun PrayerTimesScreen(paddingValues: PaddingValues, prayerViewModel: PrayerViewM
             contentPadding = PaddingValues(vertical = 24.dp)
         ) {
             item {
-                IMCAHeader(onRefresh = { prayerViewModel.retry() })
+                IMCAHeader()
             }
             
             if (isLoading) {
@@ -57,68 +56,6 @@ fun PrayerTimesScreen(paddingValues: PaddingValues, prayerViewModel: PrayerViewM
                     ErrorState(error = error!!, onRetry = { prayerViewModel.retry() })
                 }
             } else if (prayers.isNotEmpty()) {
-                item {
-                    // Debug info - show API response and location
-                    val currentLocation by prayerViewModel.currentLocation.collectAsStateWithLifecycle()
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFF2A3441)
-                        ),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(16.dp)
-                        ) {
-                            Text(
-                                text = "API Response (${prayers.size} prayers loaded)",
-                                style = MaterialTheme.typography.bodySmall.copy(
-                                    color = Color(0xFF10B981),
-                                    fontWeight = FontWeight.Bold
-                                )
-                            )
-                            Text(
-                                text = "Prayers: ${prayers.map { "${it.name}: ${it.athan}" }.joinToString(", ")}",
-                                style = MaterialTheme.typography.bodySmall.copy(
-                                    color = Color(0xFF94A3B8)
-                                )
-                            )
-                            
-                            Spacer(modifier = Modifier.height(8.dp))
-                            
-                            if (currentLocation != null) {
-                                Text(
-                                    text = "📍 Location-based prayer times",
-                                    style = MaterialTheme.typography.bodySmall.copy(
-                                        color = Color(0xFF4F9DFF),
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                )
-                                Text(
-                                    text = "Lat: ${String.format("%.4f", currentLocation!!.latitude)}, Lon: ${String.format("%.4f", currentLocation!!.longitude)}",
-                                    style = MaterialTheme.typography.bodySmall.copy(
-                                        color = Color(0xFF94A3B8)
-                                    )
-                                )
-                            } else {
-                                Text(
-                                    text = "📍 Using default prayer times (Indianapolis, IN)",
-                                    style = MaterialTheme.typography.bodySmall.copy(
-                                        color = Color(0xFFEF4444),
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                )
-                                Text(
-                                    text = "Enable location access for accurate prayer times",
-                                    style = MaterialTheme.typography.bodySmall.copy(
-                                        color = Color(0xFF94A3B8)
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-                
                 item {
                     CurrentPrayerCard(prayers = prayers)
                 }
@@ -132,7 +69,7 @@ fun PrayerTimesScreen(paddingValues: PaddingValues, prayerViewModel: PrayerViewM
 }
 
 @Composable
-fun IMCAHeader(onRefresh: () -> Unit) {
+fun IMCAHeader() {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -144,30 +81,17 @@ fun IMCAHeader(onRefresh: () -> Unit) {
             modifier = Modifier.padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Home,
-                    contentDescription = "IMCA",
-                    modifier = Modifier.size(48.dp),
-                    tint = Color(0xFF4F9DFF)
-                )
-                
-                IconButton(
-                    onClick = onRefresh
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Refresh,
-                        contentDescription = "Refresh",
-                        tint = Color(0xFF4F9DFF)
-                    )
-                }
-            }
+            // IMCA Logo/Icon
+            Icon(
+                imageVector = Icons.Default.Home,
+                contentDescription = "IMCA",
+                modifier = Modifier.size(48.dp),
+                tint = Color(0xFF4F9DFF)
+            )
             
             Spacer(modifier = Modifier.height(16.dp))
             
+            // IMCA Name
             Text(
                 text = "Indianapolis Muslim Community Association",
                 style = MaterialTheme.typography.titleLarge.copy(
@@ -179,22 +103,27 @@ fun IMCAHeader(onRefresh: () -> Unit) {
             
             Spacer(modifier = Modifier.height(8.dp))
             
-            val currentDate = java.time.LocalDate.now()
+            // Today's date
+            val currentDate = LocalDate.now()
             val dayOfWeek = currentDate.dayOfWeek.toString().lowercase().replaceFirstChar { it.uppercase() }
-            val formattedDate = currentDate.format(java.time.format.DateTimeFormatter.ofPattern("MMMM d, yyyy"))
+            val formattedDate = currentDate.format(DateTimeFormatter.ofPattern("MMMM d, yyyy"))
             
             Text(
-                text = dayOfWeek,
+                text = "$dayOfWeek, $formattedDate",
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Medium,
                     color = Color(0xFF4F9DFF)
                 ),
                 textAlign = TextAlign.Center
             )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            // Location
             Text(
-                text = formattedDate,
+                text = "Indianapolis, IN",
                 style = MaterialTheme.typography.bodyLarge.copy(
-                    color = Color(0xFFF8FAFC)
+                    color = Color(0xFF94A3B8)
                 ),
                 textAlign = TextAlign.Center
             )
@@ -248,7 +177,7 @@ fun CurrentPrayerCard(prayers: List<Prayer>) {
                 Spacer(modifier = Modifier.height(8.dp))
                 
                 Text(
-                    text = "Iqamah: ${prayer.iqamah}",
+                    text = "Athan: ${prayer.athan} • Iqamah: ${prayer.iqamah}",
                     style = MaterialTheme.typography.titleMedium.copy(
                         color = Color.White
                     ),
@@ -265,7 +194,7 @@ fun CurrentPrayerCard(prayers: List<Prayer>) {
 fun PrayerCard(prayer: Prayer) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFF1A2332)
         ),
@@ -273,76 +202,49 @@ fun PrayerCard(prayer: Prayer) {
             defaultElevation = 4.dp
         )
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Prayer icon and name
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Icon(
-                    imageVector = getPrayerIcon(prayer.name),
-                    contentDescription = prayer.name,
-                    modifier = Modifier.size(32.dp),
-                    tint = Color(0xFF4F9DFF)
-                )
-                Text(
-                    text = prayer.name,
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFF8FAFC)
-                    ),
-                    textAlign = TextAlign.Center
-                )
-            }
+            // Prayer icon
+            Icon(
+                imageVector = getPrayerIcon(prayer.name),
+                contentDescription = prayer.name,
+                modifier = Modifier.size(32.dp),
+                tint = Color(0xFF4F9DFF)
+            )
             
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            // Prayer name
+            Text(
+                text = prayer.name,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFFF8FAFC)
+                ),
+                modifier = Modifier.weight(1f)
+            )
             
             // Prayer times
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(48.dp)
+            Column(
+                horizontalAlignment = Alignment.End
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = "Athan",
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            color = Color(0xFF94A3B8),
-                            fontWeight = FontWeight.Medium
-                        ),
-                        textAlign = TextAlign.Center
+                Text(
+                    text = prayer.athan,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFFF8FAFC)
                     )
-                    Text(
-                        text = prayer.athan,
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFFF8FAFC)
-                        ),
-                        textAlign = TextAlign.Center
+                )
+                Text(
+                    text = prayer.iqamah,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        color = Color(0xFF94A3B8)
                     )
-                }
-                
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = "Iqamah",
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            color = Color(0xFF94A3B8),
-                            fontWeight = FontWeight.Medium
-                        ),
-                        textAlign = TextAlign.Center
-                    )
-                    Text(
-                        text = prayer.iqamah,
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFFF8FAFC)
-                        ),
-                        textAlign = TextAlign.Center
-                    )
-                }
+                )
             }
         }
     }
@@ -352,7 +254,6 @@ fun PrayerCard(prayer: Prayer) {
 fun getPrayerIcon(prayerName: String): androidx.compose.ui.graphics.vector.ImageVector {
     return when (prayerName.lowercase()) {
         "fajr" -> Icons.Default.Home
-        "sunrise" -> Icons.Default.Home
         "dhuhr" -> Icons.Default.Home
         "asr" -> Icons.Default.Home
         "maghrib" -> Icons.Default.Home
@@ -458,7 +359,7 @@ fun ErrorState(error: String, onRetry: () -> Unit) {
 
 @Composable
 fun getCurrentPrayer(prayers: List<Prayer>): Prayer? {
-    val currentTime = LocalTime.now()
+    val currentTime = java.time.LocalTime.now()
     
     // Convert prayer times to LocalTime for comparison
     val prayerTimes = prayers.mapNotNull { prayer ->
@@ -473,7 +374,7 @@ fun getCurrentPrayer(prayers: List<Prayer>): Prayer? {
                 else -> hour
             }
             
-            prayer to LocalTime.of(hour24, minute, second)
+            prayer to java.time.LocalTime.of(hour24, minute, second)
         } catch (e: Exception) {
             null
         }

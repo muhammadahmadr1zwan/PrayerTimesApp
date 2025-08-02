@@ -74,29 +74,6 @@ public class PrayerService {
         String today = java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE);
         return new PrayerTimeResponse(today, jummahPrayers);
     }
-    
-    // New methods for location-based prayer times
-    public PrayerTimeResponse getTodayPrayerTimesWithLocation(double latitude, double longitude, String timezone) {
-        return calculationService.calculatePrayerTimesForDate(
-            java.time.LocalDate.now().toString(), 
-            latitude, 
-            longitude, 
-            timezone
-        );
-    }
-    
-    public PrayerTimeResponse getTomorrowPrayerTimesWithLocation(double latitude, double longitude, String timezone) {
-        return calculationService.calculatePrayerTimesForDate(
-            java.time.LocalDate.now().plusDays(1).toString(), 
-            latitude, 
-            longitude, 
-            timezone
-        );
-    }
-    
-    public PrayerTimeResponse getPrayerTimesForDateWithLocation(String date, double latitude, double longitude, String timezone) {
-        return calculationService.calculatePrayerTimesForDate(date, latitude, longitude, timezone);
-    }
 
     private static class PrayerCsvRecord {
         String date, name, athan, iqamah;

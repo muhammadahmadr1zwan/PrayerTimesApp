@@ -21,11 +21,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import java.time.LocalTime
 
 @Composable
-fun PrayerTimesScreen(paddingValues: PaddingValues) {
-    val prayerViewModel: PrayerViewModel = viewModel()
+fun PrayerTimesScreen(paddingValues: PaddingValues, prayerViewModel: PrayerViewModel) {
     val prayers by prayerViewModel.prayers.collectAsStateWithLifecycle()
     val isLoading by prayerViewModel.isLoading.collectAsStateWithLifecycle()
     val error by prayerViewModel.error.collectAsStateWithLifecycle()
+    
+    // Refresh prayer times when screen is displayed
+    LaunchedEffect(Unit) {
+        prayerViewModel.retry()
+    }
     
     Surface(
         modifier = Modifier
@@ -41,7 +45,7 @@ fun PrayerTimesScreen(paddingValues: PaddingValues) {
             contentPadding = PaddingValues(vertical = 24.dp)
         ) {
             item {
-                IMCAHeader()
+                IMCAHeader(onRefresh = { prayerViewModel.retry() })
             }
             
             if (isLoading) {
@@ -53,6 +57,35 @@ fun PrayerTimesScreen(paddingValues: PaddingValues) {
                     ErrorState(error = error!!, onRetry = { prayerViewModel.retry() })
                 }
             } else if (prayers.isNotEmpty()) {
+                item {
+                    // Debug info - show API response
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(0xFF2A3441)
+                        ),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp)
+                        ) {
+                            Text(
+                                text = "API Response (${prayers.size} prayers loaded)",
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    color = Color(0xFF10B981),
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                            Text(
+                                text = "Prayers: ${prayers.map { "${it.name}: ${it.athan}" }.joinToString(", ")}",
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    color = Color(0xFF94A3B8)
+                                )
+                            )
+                        }
+                    }
+                }
+                
                 item {
                     CurrentPrayerCard(prayers = prayers)
                 }
@@ -66,7 +99,7 @@ fun PrayerTimesScreen(paddingValues: PaddingValues) {
 }
 
 @Composable
-fun IMCAHeader() {
+fun IMCAHeader(onRefresh: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -78,12 +111,27 @@ fun IMCAHeader() {
             modifier = Modifier.padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(
-                imageVector = Icons.Default.Home,
-                contentDescription = "IMCA",
-                modifier = Modifier.size(48.dp),
-                tint = Color(0xFF4F9DFF)
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "IMCA",
+                    modifier = Modifier.size(48.dp),
+                    tint = Color(0xFF4F9DFF)
+                )
+                
+                IconButton(
+                    onClick = onRefresh
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = "Refresh",
+                        tint = Color(0xFF4F9DFF)
+                    )
+                }
+            }
             
             Spacer(modifier = Modifier.height(16.dp))
             
@@ -99,7 +147,7 @@ fun IMCAHeader() {
             Spacer(modifier = Modifier.height(8.dp))
             
             val currentDate = java.time.LocalDate.now()
-            val dayOfWeek = currentDate.dayOfWeek.toString().lowercase().capitalize()
+            val dayOfWeek = currentDate.dayOfWeek.toString().lowercase().replaceFirstChar { it.uppercase() }
             val formattedDate = currentDate.format(java.time.format.DateTimeFormatter.ofPattern("MMMM d, yyyy"))
             
             Text(

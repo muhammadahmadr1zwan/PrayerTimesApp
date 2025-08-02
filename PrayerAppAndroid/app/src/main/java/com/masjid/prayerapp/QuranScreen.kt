@@ -159,7 +159,7 @@ fun LastReadCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = Icons.Default.Book,
+                imageVector = Icons.Default.Info,
                 contentDescription = "Last Read",
                 modifier = Modifier.size(32.dp),
                 tint = Color.White

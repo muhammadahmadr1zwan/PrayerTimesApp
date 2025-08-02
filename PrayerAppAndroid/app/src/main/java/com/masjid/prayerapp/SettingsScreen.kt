@@ -126,7 +126,7 @@ fun SettingsScreen(paddingValues: PaddingValues) {
             
             item {
                 SettingCard(
-                    icon = Icons.Default.VolumeUp,
+                    icon = Icons.Default.Info,
                     title = "Adhan Sound",
                     subtitle = "Play adhan at prayer times",
                     isSwitch = true,
@@ -142,7 +142,7 @@ fun SettingsScreen(paddingValues: PaddingValues) {
             
             item {
                 SettingCard(
-                    icon = Icons.Default.Schedule,
+                    icon = Icons.Default.Home,
                     title = "Notification Time",
                     subtitle = "$notificationTime minutes before prayer",
                     isSwitch = false,
@@ -188,7 +188,7 @@ fun SettingsScreen(paddingValues: PaddingValues) {
             
             item {
                 SettingCard(
-                    icon = Icons.Default.MyLocation,
+                    icon = Icons.Default.LocationOn,
                     title = "Auto-detect Location",
                     subtitle = "Automatically detect your location",
                     isSwitch = true,
@@ -217,7 +217,7 @@ fun SettingsScreen(paddingValues: PaddingValues) {
             
             item {
                 SettingCard(
-                    icon = Icons.Default.DarkMode,
+                    icon = Icons.Default.Info,
                     title = "Dark Theme",
                     subtitle = "Use dark theme for better visibility",
                     isSwitch = true,
@@ -232,7 +232,7 @@ fun SettingsScreen(paddingValues: PaddingValues) {
             
             item {
                 SettingCard(
-                    icon = Icons.Default.Translate,
+                    icon = Icons.Default.Info,
                     title = "Language",
                     subtitle = "English",
                     isSwitch = false,

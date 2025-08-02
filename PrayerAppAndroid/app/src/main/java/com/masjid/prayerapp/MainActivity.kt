@@ -38,7 +38,7 @@ fun IMCAApp() {
     val tabs = listOf(
         TabItem("Prayer Times", Icons.Default.Home),
         TabItem("Qibla", Icons.Default.LocationOn),
-        TabItem("Quran", Icons.Default.Book),
+        TabItem("Quran", Icons.Default.Info),
         TabItem("Settings", Icons.Default.Settings)
     )
     
@@ -72,7 +72,7 @@ fun IMCAApp() {
             }
         ) { paddingValues ->
             when (selectedTab) {
-                0 -> PrayerTimesScreen(paddingValues)
+                0 -> PrayerTimesScreen(paddingValues, prayerViewModel)
                 1 -> QiblaScreen(paddingValues)
                 2 -> QuranScreen(paddingValues)
                 3 -> SettingsScreen(paddingValues)

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
 MERGED from [androidx.compose.material3:material3:1.1.2] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\c1d7d7c213fa9c8a426097f52dc8ce41\transformed\material3-1.1.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material:material-ripple-android:1.5.4] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\1b3ae7c278a9738e5ab19d15cbd392fa\transformed\material-ripple-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.material:material-icons-core-android:1.5.4] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\9f1f6fd2c8aa75ead68bd92f5f003564\transformed\material-icons-core-release\AndroidManifest.xml:2:1-7:12
@@ -38,6 +38,7 @@ MERGED from [androidx.core:core-ktx:1.12.0] C:\Users\Ahmad\.gradle\caches\8.14.3
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\87427806b6a9a1e2daeed2a66c29a9dc\transformed\autofill-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core:1.12.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\e1ff55e086817e8c9149344c31bce38e\transformed\core-1.12.0\AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\f9a0f87ecbd39c9eb1919881021d0331\transformed\lifecycle-runtime-2.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\1d1963cdd62be555ac9035533d2b67e5\transformed\lifecycle-runtime-compose-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\c2e747066ee677fcd5bf600bbc865b03\transformed\lifecycle-viewmodel-compose-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\b81d529f4515cf0310e80ee0ad05f027\transformed\lifecycle-runtime-ktx-2.7.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.5.4] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\f74364e2d57eab6a86c9a8fda1402e76\transformed\runtime-saveable-release\AndroidManifest.xml:2:1-7:12
@@ -63,9 +64,21 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:5:5-67
 	android:name
 		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:6:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:7:22-78
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:8:5-77
+	android:name
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:8:22-74
 application
-ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:7:5-29:19
-INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:7:5-29:19
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:10:5-32:19
+INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:10:5-32:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\3db7b89e69f7a9de07ea1795719a605b\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\3db7b89e69f7a9de07ea1795719a605b\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\612493cedcad6f10459fa48d84e751fa\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
@@ -87,45 +100,45 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Ahmad\.gradle\cach
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\e1ff55e086817e8c9149344c31bce38e\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:15:9-41
 	android:fullBackupContent
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:10:9-54
-	android:roundIcon
 		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:13:9-54
+	android:roundIcon
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:16:9-54
 	tools:targetApi
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:18:9-29
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:21:9-29
 	android:icon
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:14:9-43
 	android:allowBackup
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:8:9-35
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:15:9-47
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:18:9-47
 	android:networkSecurityConfig
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:16:9-69
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:19:9-69
 	android:dataExtractionRules
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:9:9-65
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:12:9-65
 	android:usesCleartextTraffic
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:17:9-44
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:20:9-44
 activity#com.masjid.prayerapp.MainActivity
-ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:19:9-28:20
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:22:9-31:20
 	android:exported
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:21:13-36
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:24:13-36
 	android:theme
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:22:13-51
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:25:13-51
 	android:name
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:20:13-41
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:23:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:23:13-27:29
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:26:13-30:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:24:17-69
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:27:17-69
 	android:name
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:24:25-66
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:27:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:26:17-77
+ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
-		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:26:27-74
+		ADDED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml:29:27-74
 uses-sdk
 INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Ahmad\OneDrive\Desktop\PrayerAppBackend\PrayerAppAndroid\app\src\main\AndroidManifest.xml
@@ -198,6 +211,8 @@ MERGED from [androidx.core:core:1.12.0] C:\Users\Ahmad\.gradle\caches\8.14.3\tra
 MERGED from [androidx.core:core:1.12.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\e1ff55e086817e8c9149344c31bce38e\transformed\core-1.12.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\f9a0f87ecbd39c9eb1919881021d0331\transformed\lifecycle-runtime-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\f9a0f87ecbd39c9eb1919881021d0331\transformed\lifecycle-runtime-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\1d1963cdd62be555ac9035533d2b67e5\transformed\lifecycle-runtime-compose-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\1d1963cdd62be555ac9035533d2b67e5\transformed\lifecycle-runtime-compose-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\c2e747066ee677fcd5bf600bbc865b03\transformed\lifecycle-viewmodel-compose-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\c2e747066ee677fcd5bf600bbc865b03\transformed\lifecycle-viewmodel-compose-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\Ahmad\.gradle\caches\8.14.3\transforms\b81d529f4515cf0310e80ee0ad05f027\transformed\lifecycle-runtime-ktx-2.7.0\AndroidManifest.xml:20:5-44

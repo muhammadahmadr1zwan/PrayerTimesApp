@@ -118,13 +118,13 @@ fun HeaderSection() {
                 )
         ) {
             Column(
-                modifier = Modifier.padding(32.dp),
+                modifier = Modifier.padding(28.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // IMCA Logo
+                // IMCA Logo with mosque icon
                 Box(
                     modifier = Modifier
-                        .size(80.dp)
+                        .size(72.dp)
                         .clip(CircleShape)
                         .background(
                             Brush.radialGradient(
@@ -137,30 +137,39 @@ fun HeaderSection() {
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Home,
-                        contentDescription = "IMCA Logo",
-                        modifier = Modifier.size(40.dp),
+                        imageVector = Icons.Default.Place, // Mosque/place icon
+                        contentDescription = "IMCA Masjid",
+                        modifier = Modifier.size(36.dp),
                         tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
                 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 
-                // Masjid name
+                // Masjid name - simplified for better readability
                 Text(
-                    text = "Indianapolis Muslim\nCommunity Association",
+                    text = "IMCA Masjid Al-Fajr",
                     style = MaterialTheme.typography.headlineSmall.copy(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
-                        lineHeight = 26.sp
+                        fontSize = 22.sp,
+                        lineHeight = 28.sp
                     ),
                     color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Center
                 )
                 
+                Text(
+                    text = "Indianapolis Muslim Community Association",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontSize = 14.sp
+                    ),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+                
                 Spacer(modifier = Modifier.height(12.dp))
                 
-                // Location
+                // Location with address
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
@@ -173,8 +182,8 @@ fun HeaderSection() {
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "Indianapolis, IN",
-                        style = MaterialTheme.typography.bodyMedium.copy(
+                        text = "2846 Cold Spring Rd, Indianapolis, IN",
+                        style = MaterialTheme.typography.bodySmall.copy(
                             fontWeight = FontWeight.Medium
                         ),
                         color = MaterialTheme.colorScheme.primary
@@ -183,7 +192,7 @@ fun HeaderSection() {
                 
                 Spacer(modifier = Modifier.height(8.dp))
                 
-                // Date
+                // Current date with Islamic context
                 val currentDate = LocalDate.now()
                 val dayName = currentDate.dayOfWeek.name.lowercase()
                     .replaceFirstChar { it.uppercase() }
@@ -193,8 +202,20 @@ fun HeaderSection() {
                 
                 Text(
                     text = "$dayName, $formattedDate",
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = FontWeight.Medium
+                    ),
                     color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                
+                Spacer(modifier = Modifier.height(4.dp))
+                
+                // IMCA specific message
+                Text(
+                    text = "Salah is 20 min after Athan except Maghrib (5 min)",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                    textAlign = TextAlign.Center
                 )
             }
         }
@@ -469,7 +490,7 @@ fun LoadingSection() {
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "Fetching today's prayer schedule for Indianapolis...",
+                text = "Getting today's schedule for IMCA Masjid Al-Fajr...",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
@@ -512,7 +533,7 @@ fun ErrorSection(message: String, onRetry: () -> Unit) {
             Spacer(modifier = Modifier.height(24.dp))
             
             Text(
-                text = "Unable to Load Prayer Times",
+                text = "Unable to Load IMCA Prayer Times",
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -526,6 +547,15 @@ fun ErrorSection(message: String, onRetry: () -> Unit) {
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            Text(
+                text = "Prayer times are calculated for IMCA Masjid Al-Fajr location",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.6f),
                 textAlign = TextAlign.Center
             )
             

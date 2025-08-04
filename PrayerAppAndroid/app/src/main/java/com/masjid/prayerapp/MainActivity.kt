@@ -111,10 +111,10 @@ fun IMCAApp() {
     
     var selectedTab by remember { mutableStateOf(0) }
     
+    // Updated tabs - removed Quran tab to match Figma design
     val tabs = listOf(
         NavigationItem("Prayer Times", Icons.Filled.Schedule, Icons.Outlined.Schedule),
         NavigationItem("Qibla", Icons.Filled.Explore, Icons.Outlined.Explore),
-        NavigationItem("Quran", Icons.Filled.MenuBook, Icons.Outlined.MenuBook),
         NavigationItem("Settings", Icons.Filled.Settings, Icons.Outlined.Settings)
     )
     
@@ -161,8 +161,7 @@ fun IMCAApp() {
         when (selectedTab) {
             0 -> PrayerTimesScreen(paddingValues, prayerViewModel)
             1 -> QiblaScreen(paddingValues)
-            2 -> QuranScreen(paddingValues)
-            3 -> SettingsScreen(paddingValues)
+            2 -> SettingsScreen(paddingValues)
         }
     }
 }

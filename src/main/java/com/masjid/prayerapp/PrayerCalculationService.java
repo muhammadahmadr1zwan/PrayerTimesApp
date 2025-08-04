@@ -1,12 +1,15 @@
 package com.masjid.prayerapp;
 
+import com.batoulapps.adhan.*;
+import com.batoulapps.adhan.data.DateComponents;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,51 +20,62 @@ public class PrayerCalculationService {
     private static final double IMCA_LONGITUDE = -86.1581;
     private static final String IMCA_TIMEZONE = "America/Indiana/Indianapolis";
     
-    // IMCA Prayer Times (from https://imcaindy.org/prayer-times/)
-    // Updated for August 2, 2025
-    private static final LocalTime IMCA_FAJR = LocalTime.of(5, 17); // 5:17 AM
-    private static final LocalTime IMCA_DHUHR = LocalTime.of(13, 51); // 1:51 PM
-    private static final LocalTime IMCA_ASR = LocalTime.of(17, 44); // 5:44 PM
-    private static final LocalTime IMCA_MAGHRIB = LocalTime.of(20, 57); // 8:57 PM
-    private static final LocalTime IMCA_ISHA = LocalTime.of(22, 24); // 10:24 PM
-    
-    // Iqamah delays (from IMCA website)
+    // Iqamah delays (in minutes) - IMCA specific
     private static final int FAJR_IQAMAH_DELAY = 20; // 20 min after athan
     private static final int DHUHR_IQAMAH_DELAY = 20; // 20 min after athan
     private static final int ASR_IQAMAH_DELAY = 20; // 20 min after athan
-    private static final int MAGHRIB_IQAMAH_DELAY = 5; // 5 min after athan
+    private static final int MAGHRIB_IQAMAH_DELAY = 5; // 5 min after athan (special)
     private static final int ISHA_IQAMAH_DELAY = 20; // 20 min after athan
     
     public PrayerTimeResponse calculatePrayerTimesForDate(String dateStr) {
         try {
             LocalDate date = LocalDate.parse(dateStr);
             
+            // Create coordinates for Indianapolis
+            Coordinates coordinates = new Coordinates(IMCA_LATITUDE, IMCA_LONGITUDE);
+            
+            // Create date components
+            DateComponents dateComponents = new DateComponents(date.getYear(), date.getMonthValue(), date.getDayOfMonth());
+            
+            // Set calculation parameters for North America with Hanafi madhab
+            CalculationParameters params = CalculationMethod.NORTH_AMERICA.getParameters();
+            params.madhab = Madhab.HANAFI; // IMCA uses Hanafi madhab
+            
+            // Calculate prayer times using adhan library
+            PrayerTimes prayerTimes = new PrayerTimes(coordinates, dateComponents, params);
+            
+            // Convert to Indianapolis timezone
+            ZoneId indianapolisZone = ZoneId.of(IMCA_TIMEZONE);
+            
             List<Prayer> prayers = new ArrayList<>();
             
-            // Add IMCA prayer times with correct iqamah delays
-            prayers.add(createPrayer("Fajr", IMCA_FAJR, FAJR_IQAMAH_DELAY));
-            prayers.add(createPrayer("Dhuhr", IMCA_DHUHR, DHUHR_IQAMAH_DELAY));
-            prayers.add(createPrayer("Asr", IMCA_ASR, ASR_IQAMAH_DELAY));
-            prayers.add(createPrayer("Maghrib", IMCA_MAGHRIB, MAGHRIB_IQAMAH_DELAY));
-            prayers.add(createPrayer("Isha", IMCA_ISHA, ISHA_IQAMAH_DELAY));
+            // Add each prayer time with appropriate iqamah delays
+            prayers.add(createPrayerFromDate("Fajr", prayerTimes.fajr, FAJR_IQAMAH_DELAY, indianapolisZone));
+            prayers.add(createPrayerFromDate("Dhuhr", prayerTimes.dhuhr, DHUHR_IQAMAH_DELAY, indianapolisZone));
+            prayers.add(createPrayerFromDate("Asr", prayerTimes.asr, ASR_IQAMAH_DELAY, indianapolisZone));
+            prayers.add(createPrayerFromDate("Maghrib", prayerTimes.maghrib, MAGHRIB_IQAMAH_DELAY, indianapolisZone));
+            prayers.add(createPrayerFromDate("Isha", prayerTimes.isha, ISHA_IQAMAH_DELAY, indianapolisZone));
             
             return new PrayerTimeResponse(dateStr, prayers);
             
         } catch (Exception e) {
+            e.printStackTrace();
             // Fallback to empty response if calculation fails
             return new PrayerTimeResponse(dateStr, new ArrayList<>());
         }
     }
     
-    private Prayer createPrayer(String name, LocalTime prayerTime, int iqamahDelayMinutes) {
-        // Force 12-hour format with AM/PM for IMCA prayer times
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
-        String athanTime = prayerTime.format(formatter);
+    private Prayer createPrayerFromDate(String name, Date prayerDate, int iqamahDelayMinutes, ZoneId timezone) {
+        // Convert UTC Date to Indianapolis timezone
+        ZonedDateTime athanTime = prayerDate.toInstant().atZone(timezone);
+        ZonedDateTime iqamahTime = athanTime.plusMinutes(iqamahDelayMinutes);
         
-        LocalTime iqamahTime = prayerTime.plusMinutes(iqamahDelayMinutes);
+        // Format times in 12-hour format with AM/PM
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        String athanTimeStr = athanTime.format(formatter);
         String iqamahTimeStr = iqamahTime.format(formatter);
         
-        return new Prayer(name, athanTime, iqamahTimeStr);
+        return new Prayer(name, athanTimeStr, iqamahTimeStr);
     }
     
     public PrayerTimeResponse getTodayPrayerTimes() {

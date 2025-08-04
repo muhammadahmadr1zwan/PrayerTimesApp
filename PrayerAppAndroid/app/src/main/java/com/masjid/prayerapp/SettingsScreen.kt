@@ -62,15 +62,27 @@ fun SettingsScreen(paddingValues: PaddingValues) {
         }
     }
     
-    // Check permissions on first load
+    // Load saved preferences
     LaunchedEffect(Unit) {
-        hasNotificationPermission = ContextCompat.checkSelfPermission(
-            context, 
-            Manifest.permission.POST_NOTIFICATIONS
-        ) == PackageManager.PERMISSION_GRANTED
+        val prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        prayerNotificationsEnabled = prefs.getBoolean("prayer_notifications_enabled", false)
+        adhanSoundEnabled = prefs.getBoolean("adhan_sound_enabled", false)
+        autoDetectLocationEnabled = prefs.getBoolean("auto_detect_location", false)
+        darkThemeEnabled = prefs.getBoolean("dark_theme_enabled", true)
+        notificationTime = prefs.getInt("notification_time_minutes", 15)
+        
+        // Check permissions
+        hasNotificationPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
         
         hasLocationPermission = ContextCompat.checkSelfPermission(
-            context, 
+            context,
             Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
     }
@@ -79,7 +91,7 @@ fun SettingsScreen(paddingValues: PaddingValues) {
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues),
-        color = Color(0xFF0A0F1C) // IMCA dark background
+        color = MaterialTheme.colorScheme.background // Use theme background
     ) {
         LazyColumn(
             modifier = Modifier

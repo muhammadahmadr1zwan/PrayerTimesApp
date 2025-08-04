@@ -42,7 +42,7 @@ fun QuranScreen(paddingValues: PaddingValues) {
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues),
-        color = Color(0xFF0A0F1C) // IMCA dark background
+        color = MaterialTheme.colorScheme.background // Use theme background instead of hardcoded color
     ) {
         LazyColumn(
             modifier = Modifier

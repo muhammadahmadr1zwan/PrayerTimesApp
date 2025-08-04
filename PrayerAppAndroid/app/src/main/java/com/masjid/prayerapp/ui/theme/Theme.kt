@@ -10,45 +10,60 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+// Dark color scheme matching the React template
 private val DarkColorScheme = darkColorScheme(
-    primary = PrimaryBlue,
-    secondary = SecondaryBlue,
-    tertiary = GoldAccent,
-    background = DarkBackground,
-    surface = CardBackground,
-    onPrimary = TextPrimary,
-    onSecondary = TextPrimary,
-    onTertiary = DarkBackground,
-    onBackground = TextPrimary,
-    onSurface = TextPrimary,
-    error = ErrorRed
+    primary = Primary,
+    onPrimary = PrimaryForeground,
+    primaryContainer = Primary,
+    onPrimaryContainer = PrimaryForeground,
+    secondary = Secondary,
+    onSecondary = SecondaryForeground,
+    tertiary = Accent,
+    onTertiary = AccentForeground,
+    background = Background,
+    onBackground = Foreground,
+    surface = Surface,
+    onSurface = OnSurface,
+    surfaceVariant = SurfaceVariant,
+    onSurfaceVariant = OnSurfaceVariant,
+    error = Destructive,
+    onError = DestructiveForeground,
+    outline = Border,
+    outlineVariant = GlassBorder
 )
 
+// Light color scheme (fallback, but we'll primarily use dark)
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryBlue,
-    secondary = SecondaryBlue,
-    tertiary = GoldAccent,
-    background = TextPrimary,
-    surface = Color(0xFFF1F5F9),
-    onPrimary = TextPrimary,
-    onSecondary = TextPrimary,
-    onTertiary = DarkBackground,
-    onBackground = DarkBackground,
-    onSurface = DarkBackground,
-    error = ErrorRed
+    primary = Primary,
+    onPrimary = PrimaryForeground,
+    primaryContainer = Primary,
+    onPrimaryContainer = PrimaryForeground,
+    secondary = Secondary,
+    onSecondary = SecondaryForeground,
+    tertiary = Accent,
+    onTertiary = AccentForeground,
+    background = Background,
+    onBackground = Foreground,
+    surface = Surface,
+    onSurface = OnSurface,
+    surfaceVariant = SurfaceVariant,
+    onSurfaceVariant = OnSurfaceVariant,
+    error = Destructive,
+    onError = DestructiveForeground,
+    outline = Border,
+    outlineVariant = GlassBorder
 )
 
 @Composable
 fun PrayerAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true, // Always use dark theme like the template
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = false, // Disable to use our custom colors
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -64,8 +79,8 @@ fun PrayerAppTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            window.statusBarColor = Background.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
         }
     }
 

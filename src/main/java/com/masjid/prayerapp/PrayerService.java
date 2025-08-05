@@ -66,13 +66,9 @@ public class PrayerService {
         return calculationService.getTomorrowPrayerTimes();
     }
     
-    // Method to get Jummah information
+    // Method to get Jummah information - IMCA official time
     public PrayerTimeResponse getJummahInfo() {
-        List<Prayer> jummahPrayers = new ArrayList<>();
-        jummahPrayers.add(new Prayer("Jummah", "01:30:00 PM", "01:30:00 PM")); // 1:30 PM
-        
-        String today = java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE);
-        return new PrayerTimeResponse(today, jummahPrayers);
+        return calculationService.getJummahInfo();
     }
 
     private static class PrayerCsvRecord {

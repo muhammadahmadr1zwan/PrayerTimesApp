@@ -40,7 +40,7 @@ Scan this QR code to download the APK directly to your Android device:
 ## 📸 App Screenshots
 
 ### 🏠 Home Screen - Prayer Times Overview
-![Home Screen](screenshots/home_screen.png)
+Home Screen(screenshots/home_screen.png)
 - **IMCA Logo**: Golden diamond logo with crescent moon
 - **Current Date**: Tuesday, August 5, 2025 (12 Safar 1448 AH)
 - **Location**: IMCA Masjid Al-Fajr, Indianapolis
@@ -50,7 +50,7 @@ Scan this QR code to download the APK directly to your Android device:
 - **Current Prayer Highlight**: Dhuhr with blue border and progress indicator
 
 ### 🕌 Prayer Times Screen - Detailed View
-![Prayer Times Screen]<img width="1344" height="2992" alt="Screenshot_20250805_150214" src="https://github.com/user-attachments/assets/f4fe0c5e-fb14-4e29-80c5-fba39a450ff3" />
+Prayer Times Screen<img width="1344" height="2992" alt="Screenshot_20250805_150214" src="https://github.com/user-attachments/assets/f4fe0c5e-fb14-4e29-80c5-fba39a450ff3" />
 - **Header**: "Next prayer timing and information"
 - **Main Prayer Card**: Asr prayer with countdown timer
 - **Information Cards**: Last prayer, current time, location, next Iqamah
@@ -58,7 +58,7 @@ Scan this QR code to download the APK directly to your Android device:
 - **Real-time Updates**: Live prayer time calculations
 
 ### 🧘 Dhikr Screen - Remembrance Counter
-![Dhikr Screen]<img width="1344" height="2992" alt="Screenshot_20250805_150148" src="https://github.com/user-attachments/assets/434d0995-b987-41ee-8970-1a9156617b5e" />
+Dhikr Screen<img width="1344" height="2992" alt="Screenshot_20250805_150148" src="https://github.com/user-attachments/assets/434d0995-b987-41ee-8970-1a9156617b5e" />
 - **Motto**: "Keep your heart connected with remembrance"
 - **Summary Cards**: Today (0), Complete (0), Progress (0/33)
 - **Dhikr Display**: "SubhanAllah" (سُبْحَانَ اللهِ) - "Glory be to Allah"
@@ -66,7 +66,7 @@ Scan this QR code to download the APK directly to your Android device:
 - **Progress Tracking**: 0% completion with target of 33
 
 ### 🧭 Qibla Direction Screen - Compass & GPS
-![Qibla Screen]<img width="1344" height="2992" alt="Screenshot_20250805_150138" src="https://github.com/user-attachments/assets/34aac180-9380-41b7-87e1-58e60dd91312" />
+Qibla Screen<img width="1344" height="2992" alt="Screenshot_20250805_150138" src="https://github.com/user-attachments/assets/34aac180-9380-41b7-87e1-58e60dd91312" />
 - **Header**: "IMCA Indianapolis → Mecca"
 - **Compass Display**: Real-time compass with Qibla direction
 - **Cardinal Directions**: N, W, E, S with color coding
@@ -75,8 +75,7 @@ Scan this QR code to download the APK directly to your Android device:
 - **GPS Accuracy**: 5.0m precision
 
 ### ⚙️ Settings Screen - App Configuration
-![Settings Screen]<img width="1344" height="2992" alt="Screenshot_20250805_150121" src="https://github.com/user-attachments/assets/5f75d69e-2b05-4ada-83df-af7121c11474" />
-
+Settings Screen<img width="1344" height="2992" alt="Screenshot_20250805_150121" src="https://github.com/user-attachments/assets/5f75d69e-2b05-4ada-83df-af7121c11474" />
 - **Header**: "App preferences and configuration"
 - **App Information**: IMCA Prayer App v1.0.0
 - **Logo Display**: Golden IMCA diamond logo
@@ -84,7 +83,7 @@ Scan this QR code to download the APK directly to your Android device:
 - **Navigation**: Settings tab highlighted in blue
 
 ### 🎨 App Icon - Custom Design
-![App Icon](screenshots/app_icon.png)
+![App Icon](https://github.com/user-attachments/assets/d4bf9d31-4794-40f8-a52a-79bea587672d)
 - **IMCA Diamond**: Golden diamond with "IMCA" text
 - **Prayer Elements**: Crescent moon and clock symbols
 - **Blue Gradient**: Professional background

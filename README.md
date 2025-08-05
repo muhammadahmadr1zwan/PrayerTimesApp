@@ -37,6 +37,58 @@ Scan this QR code to download the APK directly to your Android device:
 - **12-hour Format**: AM/PM time format support ✅
 - **Deployment Ready**: Configured for Render deployment ✅
 
+## 📸 App Screenshots
+
+### 🏠 Home Screen - Prayer Times Overview
+![Home Screen](screenshots/home_screen.png)
+- **IMCA Logo**: Golden diamond logo with crescent moon
+- **Current Date**: Tuesday, August 5, 2025 (12 Safar 1448 AH)
+- **Location**: IMCA Masjid Al-Fajr, Indianapolis
+- **Next Prayer**: Asr in 2h 47m (5:43 PM)
+- **Progress Bar**: 27% completion of current prayer time
+- **Prayer Grid**: All 5 prayers with times and Iqamah
+- **Current Prayer Highlight**: Dhuhr with blue border and progress indicator
+
+### 🕌 Prayer Times Screen - Detailed View
+![Prayer Times Screen](screenshots/prayer_times_screen.png)
+- **Header**: "Next prayer timing and information"
+- **Main Prayer Card**: Asr prayer with countdown timer
+- **Information Cards**: Last prayer, current time, location, next Iqamah
+- **Date Display**: Gregorian and Hijri dates
+- **Real-time Updates**: Live prayer time calculations
+
+### 🧘 Dhikr Screen - Remembrance Counter
+![Dhikr Screen](screenshots/dhikr_screen.png)
+- **Motto**: "Keep your heart connected with remembrance"
+- **Summary Cards**: Today (0), Complete (0), Progress (0/33)
+- **Dhikr Display**: "SubhanAllah" (سُبْحَانَ اللهِ) - "Glory be to Allah"
+- **Interactive Counter**: Tap to increment, +/- buttons, reset function
+- **Progress Tracking**: 0% completion with target of 33
+
+### 🧭 Qibla Direction Screen - Compass & GPS
+![Qibla Screen](screenshots/qibla_screen.png)
+- **Header**: "IMCA Indianapolis → Mecca"
+- **Compass Display**: Real-time compass with Qibla direction
+- **Cardinal Directions**: N, W, E, S with color coding
+- **Location Info**: Current location, Qibla direction (19.2°)
+- **Distance**: 13,203 km to Kaaba
+- **GPS Accuracy**: 5.0m precision
+
+### ⚙️ Settings Screen - App Configuration
+![Settings Screen](screenshots/settings_screen.png)
+- **Header**: "App preferences and configuration"
+- **App Information**: IMCA Prayer App v1.0.0
+- **Logo Display**: Golden IMCA diamond logo
+- **Build Info**: "Built for IMCA Masjid Al-Fajr, Indianapolis"
+- **Navigation**: Settings tab highlighted in blue
+
+### 🎨 App Icon - Custom Design
+![App Icon](screenshots/app_icon.png)
+- **IMCA Diamond**: Golden diamond with "IMCA" text
+- **Prayer Elements**: Crescent moon and clock symbols
+- **Blue Gradient**: Professional background
+- **Adaptive Icon**: Works on all Android devices
+
 ## 🏗️ Architecture
 
 ```

@@ -4,10 +4,59 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0"/>
-    <path
-        android:fillColor="#FF6200EE"
-        android:pathData="M54,30L54,78M30,54L78,54"/>
+    
+    <!-- Main IMCA Diamond Logo with Prayer Theme -->
+    <group android:translateX="54" android:translateY="54">
+        
+        <!-- Diamond Background with enhanced shadow -->
+        <path
+            android:fillColor="#B8860B"
+            android:pathData="M2,-30 L38,2 L2,34 L-34,2 Z" />
+        <path
+            android:fillColor="#D4AF37"
+            android:pathData="M0,-32 L36,0 L0,32 L-36,0 Z" />
+        
+        <!-- IMCA Text in Diamond - Optimized for icon size -->
+        <group android:scaleX="0.8" android:scaleY="0.8">
+            <!-- I -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M-18,-10 L-14,-10 L-14,-8 L-16,-8 L-16,8 L-14,8 L-14,10 L-18,10 L-18,8 L-16,8 L-16,-8 L-18,-8 Z" />
+            
+            <!-- M -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M-12,-10 L-8,-10 L-5,2 L-2,-10 L2,-10 L2,10 L-1,10 L-1,-2 L-3,6 L-7,6 L-9,-2 L-9,10 L-12,10 Z" />
+            
+            <!-- C -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M4,-10 C8,-10 11,-7 11,-2 C11,3 8,6 4,6 L4,3 C6,3 8,2 8,0 C8,-4 6,-5 4,-5 L4,-8 C6,-8 7,-6 7,-4 L10,-4 C10,-8 8,-10 4,-10 Z" />
+            
+            <!-- A -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M13,-10 L17,-10 L22,10 L19,10 L18,6 L15,6 L14,10 L11,10 Z M16,-6 L17,-2 L16,2 L15,2 L16,-6 Z" />
+        </group>
+        
+        <!-- Prayer Crescent Moon at the top -->
+        <group android:translateX="0" android:translateY="-45">
+            <path
+                android:fillColor="#D4AF37"
+                android:pathData="M-8,-8 C-6,-10 -2,-10 0,-8 C2,-6 2,-2 0,0 C-2,2 -6,2 -8,0 C-6,0 -4,-1 -4,-4 C-4,-7 -6,-8 -8,-8 Z" />
+        </group>
+        
+        <!-- Prayer Times Clock Elements -->
+        <group android:translateX="0" android:translateY="45">
+            <!-- Clock circle -->
+            <path
+                android:fillColor="#D4AF37"
+                android:pathData="M-12,-12 C-6.6,-12 -2,-7.4 -2,-2 C-2,3.4 -6.6,8 -12,8 C-17.4,8 -22,3.4 -22,-2 C-22,-7.4 -17.4,-12 -12,-12 Z" />
+            
+            <!-- Clock hands -->
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M-12,-2 L-12,-8 M-12,-2 L-8,-2" />
+        </group>
+    </group>
 </vector> 

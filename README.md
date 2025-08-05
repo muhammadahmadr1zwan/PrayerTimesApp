@@ -2,21 +2,33 @@
 
 A complete prayer times application with a Spring Boot backend API and Android mobile app for the Indianapolis Muslim Community Association (IMCA).
 
+## 📱 Download App
+
+### QR Code Download
+Scan this QR code to download the APK directly to your Android device:
+
+![IMCA Prayer App QR Code](imca_prayer_app_qr.png)
+
+**Download Link**: [https://muhammadahmadr1zwan.github.io/PrayerTimesApp/download.html](https://muhammadahmadr1zwan.github.io/PrayerTimesApp/download.html)
+
+### Manual Download
+- **APK File**: `PrayerAppAndroid/app/build/outputs/apk/debug/app-debug.apk`
+- **Size**: ~16MB
+- **Android Version**: 6.0 (API 23) and above
+
 ## 📱 Features
 
-### Android App - **FULLY IMPLEMENTED** ✅
+### Android App - **IMPLEMENTED FEATURES** ✅
 - **Prayer Times**: Real-time prayer times with current prayer highlighting ✅
 - **Smart Current Prayer**: Automatically determines current prayer based on time ✅
 - **Modern UI**: Dark theme with IMCA branding and centered content ✅
 - **API Integration**: Connects to backend for accurate prayer times ✅
-- **Bottom Navigation**: 4-tab navigation (Prayer Times, Qibla, Quran, Settings) ✅
+- **Bottom Navigation**: 5-tab navigation (Home, Prayers, Dhikr, Qibla, Settings) ✅
 - **Qibla Direction**: Real compass integration with GPS location and Qibla calculation ✅
-- **Quran**: Complete Surah list with Arabic text and recitation links ✅
-- **Settings**: Functional settings with working notifications and preferences ✅
+- **Hijri Date**: Accurate Hijri calendar date display ✅
 - **Prayer Notifications**: Real-time notifications before prayer times ✅
-- **Adhan Sound**: Notification system for prayer calls ✅
 - **Location Services**: GPS integration for accurate Qibla direction ✅
-- **Last Read Tracking**: Quran reading progress tracking ✅
+- **Settings**: Functional settings with working notifications and preferences ✅
 
 ### Backend API - **FULLY IMPLEMENTED** ✅
 - **Prayer Times API**: RESTful endpoints for prayer times ✅
@@ -41,9 +53,8 @@ PrayerTimesApp/
 │   │   ├── MainActivity.kt          # Main app entry point
 │   │   ├── PrayerListScreen.kt      # Prayer times display ✅
 │   │   ├── QiblaScreen.kt           # Real compass & GPS integration ✅
-│   │   ├── QuranScreen.kt           # Quran with recitation links ✅
 │   │   ├── SettingsScreen.kt        # Functional settings ✅
-│   │   ├── PrayerViewModel.kt       # Data management ✅
+│   │   ├── PrayerTimesViewModel.kt  # Data management ✅
 │   │   ├── PrayerApiService.kt      # API communication ✅
 │   │   ├── PrayerNotificationService.kt # Notification system ✅
 │   │   └── Models.kt                # Data models ✅
@@ -156,7 +167,7 @@ PrayerTimesApp/
 ## 📱 App Screenshots
 
 ### Prayer Times Screen ✅ **FULLY FUNCTIONAL**
-- IMCA header with current date
+- IMCA header with current date and Hijri date
 - Current prayer highlighting (smart time-based logic)
 - All prayer times with Athan and Iqamah from API
 - Centered content layout
@@ -171,14 +182,6 @@ PrayerTimesApp/
 - Real-time accuracy indicators
 - Permission handling for location access
 
-### Quran Screen ✅ **FULLY FUNCTIONAL**
-- Complete Surah list with Arabic text
-- English translations and descriptions
-- Last read tracking with SharedPreferences
-- Click to open Quran reading apps/websites
-- Play recitation links to audio sources
-- Reading progress persistence
-
 ### Settings Screen ✅ **FULLY FUNCTIONAL**
 - Working prayer notification toggles
 - Real notification scheduling with AlarmManager
@@ -191,10 +194,10 @@ PrayerTimesApp/
 ## 🔧 Configuration
 
 ### Backend Configuration ✅ **FULLY IMPLEMENTED**
-- **Location**: Indianapolis, IN
+- **Location**: Indianapolis, IN (39.7684, -86.1581)
 - **Time Zone**: Eastern Time
-- **Prayer Calculation**: Custom algorithm
-- **Iqamah Delays**: IMCA-specific timing
+- **Prayer Calculation**: ISNA method with Hanafi madhab
+- **Iqamah Delays**: IMCA-specific timing (20 min, Maghrib 5 min)
 
 ### Android Configuration ✅ **FULLY IMPLEMENTED**
 - **API Base URL**: `https://prayer-app-backend-vozu.onrender.com/api/prayer-times/`
@@ -203,7 +206,6 @@ PrayerTimesApp/
 - **Language**: English
 - **Notifications**: Configurable timing (5-30 minutes)
 - **Location**: GPS and compass integration
-- **Quran**: External app/website integration
 
 ## 🚀 Deployment
 
@@ -216,7 +218,7 @@ The backend is automatically deployed on Render:
 ### Android Deployment ✅ **READY**
 - Build APK using Android Studio or Gradle
 - Test on physical device
-- Distribute APK to users
+- Distribute APK to users via QR code
 
 ## 🎯 Current Status
 
@@ -225,11 +227,10 @@ The backend is automatically deployed on Render:
 - Android app prayer times screen with real-time data
 - Smart current prayer detection based on device time
 - Real Qibla direction with compass and GPS
-- Functional Quran screen with external links
 - Working settings with notification management
 - Prayer time notifications with AlarmManager
 - Location services integration
-- Last read tracking for Quran
+- Hijri date calculation and display
 - Modern UI with centered content
 - Complete permission handling
 
@@ -241,7 +242,6 @@ The backend is automatically deployed on Render:
 - BroadcastReceivers for notifications
 - Sensor integration for compass
 - Location services for GPS
-- External intent handling for Quran apps
 
 ## 📞 Contact Information
 
